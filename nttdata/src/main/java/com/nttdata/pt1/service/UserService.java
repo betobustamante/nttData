@@ -1,9 +1,11 @@
 package com.nttdata.pt1.service;
 
+import com.nttdata.pt1.exception.BusinessException;
 import com.nttdata.pt1.model.User;
 import com.nttdata.pt1.repository.UserRepository;
 import org.hibernate.annotations.Comment;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
@@ -16,6 +18,11 @@ public class UserService {
 
     public User getUserbyId(String idNumber){
         Optional<User> optionalUser = userRepository.findById(idNumber);
-        return optionalUser.get();
+        try {
+            return optionalUser.get();
+        }catch (Exception ex){
+            throw ex;
+        }
+
     }
 }
